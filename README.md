@@ -1,5 +1,3 @@
-# Blog
-
 ## JavaScript
 - [《实战ES2015》读书笔记 ](https://github.com/cccyb/blog/issues/3)
 
