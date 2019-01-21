@@ -17,6 +17,7 @@
 
 ## 随记
 - [利用VPS虚拟主机+debian+shadowsocks快速搭建自己的VPN](https://github.com/cccyb/blog/issues/2)
+- [服务器入门指北](https://github.com/cccyb/blog/issues/10)
 
 ## 数据库
 - [Mac下MySQL 5.7连接Navicat中文乱码解决方案](https://github.com/cccyb/blog/issues/1)
