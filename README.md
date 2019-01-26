@@ -1,6 +1,6 @@
 # blog
 
-egg开发的node博客
+node博客
 
 ## QuickStart
 

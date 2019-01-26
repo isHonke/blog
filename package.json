@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "egg开发的node博客",
+  "description": "node博客",
   "private": true,
   "dependencies": {
     "egg": "^2.2.1",
@@ -39,6 +39,6 @@
     "type": "git",
     "url": ""
   },
-  "author": "cccyb",
+  "author": "",
   "license": "MIT"
 }
