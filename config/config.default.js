@@ -9,5 +9,10 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  config.view = {
+    defaultViewEngine: 'nunjucks',
+    defaultExtension: '.nj',
+  };
+
   return config;
 };

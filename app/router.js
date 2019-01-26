@@ -6,7 +6,7 @@
 module.exports = app => {
   const { router, controller } = app;
 
-  // 前台路由
+  // 前台路由，交由controller渲染页面
   router.get('/', controller.content.posts);
   router.get('/page/:page', controller.content.posts);
   router.get('/p/:cid', controller.content.post);
@@ -25,4 +25,6 @@ module.exports = app => {
   router.get('/search', controller.search.search);
   router.get('/search/:keyword', controller.search.searchKeyword);
   router.get('/search/:keyword/:page', controller.search.searchKeyword);
+
+  // 后台路由，返回接口数据
 };
