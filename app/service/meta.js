@@ -16,6 +16,13 @@ class MetaService extends Service {
     const res = await this.app.mysql.query(sql, [ cid ]);
     return res;
   }
+
+  // 获取所有分类
+  async findAllCategories() {
+    return await this.app.mysql.select('meta', {
+      where: { type: 'category' },
+    });
+  }
 }
 
 module.exports = MetaService;

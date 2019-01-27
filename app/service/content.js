@@ -52,6 +52,13 @@ class ContentService extends Service {
     });
     return res[0];
   }
+
+  // 获取指定项目下的所有文章
+  async findPostsByMid(mid) {
+    const sql = 'select c.cid, c.title, c.slug, c.created from content as c join relationship as r where r.mid = ? and r.cid = c.cid';
+    const res = await this.app.mysql.query(sql, [ mid ]);
+    return res;
+  }
 }
 
 module.exports = ContentService;
