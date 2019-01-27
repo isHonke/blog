@@ -42,6 +42,16 @@ class ContentService extends Service {
     });
     return res[0];
   }
+
+  // 获取文章详情
+  async findPostById(cid) {
+    const res = await this.app.mysql.select('content', {
+      where: { type: 'post', status: 1, cid },
+      limit: 1,
+      offset: 0,
+    });
+    return res[0];
+  }
 }
 
 module.exports = ContentService;

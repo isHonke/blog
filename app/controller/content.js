@@ -11,17 +11,36 @@ class ContentController extends Controller {
   }
 
   async posts() {
-    const posts = await this.service.content.findPosts(1, 20);
+    const page = this.ctx.params.page || 1;
+    const posts = await this.service.content.findPosts(page, 20);
     const commonData = await this.service.common.getCommonData();
     const data = Object.assign({
       bgColor: 'bg-grey',
       posts,
+      postShare: false,
+      postDirectory: false,
     }, commonData);
     await this.ctx.render('index.html', data);
   }
 
   async post() {
-    this.ctx.body = `post: ${this.ctx.params.cid}, ${this.ctx.params.page || 1}`;
+    const { cid } = this.ctx.params;
+    const post = await this.service.content.findPostById(cid);
+    const create_date = new Date(post.created * 1000);
+    post.time = create_date.toDateString().split(' ').splice(1)
+      .join(' ');
+    const category = await this.service.meta.findCategoryById(cid);
+    const tags = await this.service.meta.findTagsById(cid);
+    const commonData = await this.service.common.getCommonData();
+    const data = Object.assign({
+      bgColor: 'bg-white',
+      post,
+      category,
+      tags,
+      postShare: true,
+      postDirectory: true,
+    }, commonData);
+    await this.ctx.render('post.html', data);
   }
 
   async page() {
