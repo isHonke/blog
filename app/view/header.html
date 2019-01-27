@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//cdn.bootcss.com" />
+    <link rel="dns-prefetch" href="//secure.gravatar.com" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="shortcut icon" href="<%=site.favicon%>">
+    <link rel="apple-touch-icon" href="<%=site.iosicon%>">
+    <title><%=site.title%></title>
+    <meta name="keywords" content="<%=site.keywords%>" />
+    <meta name="description" content="<%=site.description%>" />
+    <link href="//cdn.bootcss.com/highlight.js/9.10.0/styles/xcode.min.css" rel="stylesheet">
+    <link href="/public/style.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="<%=bgColor%>" gtools_scp_screen_capture_injected="true">
+<!--[if lt IE 8]>
+<div class="browsehappy" role="dialog">
+    当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。
+</div>
+<![endif]-->
+<header id="header" class="header bg-white">
+    <div class="navbar-container">
+        <a href="<%=site.url%>" class="navbar-logo">
+            <% if (site.logoUrl) { %>
+            <img src="<%=site.logoUrl%>" alt="<%=site.title%>" />
+            <% } else { %>
+            <%=site.title%>
+            <% } %>
+        </a>
+        <div class="navbar-menu">
+            <a href="/category">分类</a>
+            <a href="/archives">归档</a>
+            <% pages.forEach(function(page){ %>
+            <a href="/custom-<%=page.slug%>"><%=page.title%></a>
+            <% }); %>
+        </div>
+        <a href="/search" class="navbar-search">
+            <span class="icon-search"></span>
+        </a>
+        <div class="navbar-mobile-menu" onclick="">
+            <span class="icon-menu cross"><span class="middle"></span></span>
+            <ul>
+                <li><a href="/category">分类</a></li>
+                <li><a href="/archives">归档</a></li>
+                <% pages.forEach(function(page){ %>
+                <li><a href="/custom-<%=page.slug%>"><%=page.title%></a></li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+</header>

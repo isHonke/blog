@@ -1,0 +1,41 @@
+<footer id="footer" class="footer bg-white">
+	<div class="footer-social">
+		<div class="footer-container clearfix">
+			<div class="social-list">
+				<a class="social weibo" target="blank" href="/">WEIBO</a>
+                <a class="social zhihu" target="blank" href="/">ZHIHU</a>
+                <a class="social rss" target="blank" href="/">RSS</a>
+				<a class="social github" target="blank" href="/">GITHUB</a>
+				<a class="social twitter" target="blank" href="/">TWITTER</a>
+			</div>
+		</div>
+	</div>
+	<div class="footer-meta">
+		<div class="footer-container">
+			<div class="meta-item meta-copyright">
+				<div class="meta-copyright-info">
+                    <a href="/" class="info-logo">
+                        <% if (site.logoUrl) { %>
+                        <img src="<%=site.logoUrl%>" alt="<%=site.title%>" />
+                        <% } else { %>
+                        <%=site.title%>
+                        <% } %>
+                    </a>
+					<div class="info-text">
+                    	<p>Theme is <a href="https://github.com/chakhsu/pinghsu" target="_blank">Pinghsu</a> by <a href="https://www.linpx.com/" target="_blank">Chakhsu</a></p>
+						<p>Powered by <a href="https://chenyubo.cc" target="_blank" rel="nofollow">cccyb</a></p>
+						<p>&copy; <%=year%> <a href="/"><%=site.title%></a></p>
+					</div>
+				</div>
+			</div>
+			<div class="meta-item meta-posts">
+				<h3 class="meta-title">RECENT POSTS</h3>
+			</div>
+            <div class="meta-item meta-comments">
+                <h3 class="meta-title">RECENT COMMENTS</h3>
+            </div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>

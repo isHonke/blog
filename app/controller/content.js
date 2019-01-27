@@ -4,11 +4,25 @@ const Controller = require('egg').Controller;
 
 class ContentController extends Controller {
   async allPosts() {
-    this.ctx.body = 'all posts';
+    // 假如 我们拿到用户 id 从数据库获取用户详细信息
+    const ctx = this.ctx;
+    const user = await ctx.service.user.find();
+    ctx.body = user;
   }
 
   async posts() {
-    this.ctx.body = `posts: ${this.ctx.params.page || 1}`;
+    const site = await this.service.config.findConfigByGroup('site');
+    const pages = await this.service.content.findAllPages();
+    const posts = await this.service.content.findPosts(1, 20);
+    const data = {
+      site,
+      bgColor: 'bg-grey',
+      pages,
+      posts,
+      year: new Date().getFullYear(),
+    };
+    console.log(posts);
+    await this.ctx.render('index.html', data);
   }
 
   async post() {
@@ -16,7 +30,7 @@ class ContentController extends Controller {
   }
 
   async page() {
-    this.ctx.body = `page: ${this.ctx.params.slug}`;
+    this.ctx.body = `custom-page: ${this.ctx.params.slug}`;
   }
 }
 

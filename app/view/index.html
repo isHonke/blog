@@ -1,0 +1,33 @@
+<% include header.html %>
+
+<div class="main-content index-page clearfix">
+	<div class="post-lists">
+		<div class="post-lists-body">
+        <% posts.forEach(function(post){ %>
+            <div class="post-list-item">
+				<div class="post-list-item-container">
+					<div class="item-thumb bg-<%=post.color%>" style="background-image:url(<%=post.thumb%>);"></div>
+					<a href="/p/<%=post.cid%>">
+	                	<div class="item-desc">
+							<p><%=post.description%></p>
+						</div>
+					</a>
+					<div class="item-slant reverse-slant bg-<%=post.color%>"></div>
+					<div class="item-slant"></div>
+					<div class="item-label">
+						<div class="item-title"><a href="/p/<%=post.cid%>"><%=post.title%></a></div>
+						<div class="item-meta clearfix">
+                            <div class="item-meta-ico bg-ico-<%=post.logo%>" style="background: url(/public/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+							<div class="item-meta-cat">
+                                <a href="/category/111">111</a>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+        <% }); %>
+		</div>
+	</div>
+  </div>
+</div>
+<% include footer.html %>
