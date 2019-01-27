@@ -14,14 +14,19 @@ class ContentController extends Controller {
     const site = await this.service.config.findConfigByGroup('site');
     const pages = await this.service.content.findAllPages();
     const posts = await this.service.content.findPosts(1, 20);
+    const recentPosts = await this.service.content.findRecentPosts(8);
+    const recentComments = await this.service.comment.findRecentComments(8);
+    const social = await this.service.config.findConfigByGroup('social');
     const data = {
       site,
       bgColor: 'bg-grey',
       pages,
       posts,
+      social,
       year: new Date().getFullYear(),
+      recentPosts,
+      recentComments,
     };
-    console.log(posts);
     await this.ctx.render('index.html', data);
   }
 
