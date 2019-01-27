@@ -1,0 +1,17 @@
+<% include header.html %>
+
+<article class="main-content page-page">
+	<div class="post-header">
+		<h1 class="post-title" itemprop="name headline">
+			<%=page.title%>
+		</h1>
+		<div class="post-data">
+			<time <%=page.created%> itemprop="datePublished">Published on <%=page.time%></time>
+		</div>
+	</div>
+	<div id="post-content" class="post-content">
+		<%-page.content%>
+	</div>
+</article>
+
+<% include footer.html %>

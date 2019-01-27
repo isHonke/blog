@@ -32,6 +32,16 @@ class ContentService extends Service {
       offset: 0,
     });
   }
+
+  // 获取独立页面信息
+  async findPageBySlug(slug) {
+    const res = await this.app.mysql.select('content', {
+      where: { type: 'page', status: 1, slug },
+      limit: 1,
+      offset: 0,
+    });
+    return res[0];
+  }
 }
 
 module.exports = ContentService;

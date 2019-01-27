@@ -11,22 +11,12 @@ class ContentController extends Controller {
   }
 
   async posts() {
-    const site = await this.service.config.findConfigByGroup('site');
-    const pages = await this.service.content.findAllPages();
     const posts = await this.service.content.findPosts(1, 20);
-    const recentPosts = await this.service.content.findRecentPosts(8);
-    const recentComments = await this.service.comment.findRecentComments(8);
-    const social = await this.service.config.findConfigByGroup('social');
-    const data = {
-      site,
+    const commonData = await this.service.common.getCommonData();
+    const data = Object.assign({
       bgColor: 'bg-grey',
-      pages,
       posts,
-      social,
-      year: new Date().getFullYear(),
-      recentPosts,
-      recentComments,
-    };
+    }, commonData);
     await this.ctx.render('index.html', data);
   }
 
@@ -35,7 +25,17 @@ class ContentController extends Controller {
   }
 
   async page() {
-    this.ctx.body = `custom-page: ${this.ctx.params.slug}`;
+    const { slug } = this.ctx.params;
+    const commonData = await this.service.common.getCommonData();
+    const page = await this.service.content.findPageBySlug(slug);
+    const create_date = new Date(page.created * 1000);
+    page.time = create_date.toDateString().split(' ').splice(1)
+      .join(' ');
+    const data = Object.assign({
+      bgColor: 'bg-white',
+      page,
+    }, commonData);
+    await this.ctx.render('page.html', data);
   }
 }
 
