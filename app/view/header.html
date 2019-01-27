@@ -12,7 +12,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="shortcut icon" href="<%=site.favicon%>">
     <link rel="apple-touch-icon" href="<%=site.iosicon%>">
-    <title><%=site.title%></title>
+    <title>
+    <%if(title){%>
+        <%=title%> - <%=site.title%>
+    <%} else {%>
+        <%=site.title%>
+    <%}%>
+    </title>
     <meta name="keywords" content="<%=site.keywords%>" />
     <meta name="description" content="<%=site.description%>" />
     <link href="//cdn.bootcss.com/highlight.js/9.10.0/styles/xcode.min.css" rel="stylesheet">
@@ -38,10 +44,10 @@
             <% } %>
         </a>
         <div class="navbar-menu">
-            <a href="/category">分类</a>
-            <a href="/archives">归档</a>
+            <a <%if(navSlug == 'category'){%>class="current"<%}%> href="/archives">分类</a>
+            <a <%if(navSlug == 'timeline'){%>class="current"<%}%> href="/timeline">归档</a>
             <% pages.forEach(function(page){ %>
-            <a href="/custom-<%=page.slug%>"><%=page.title%></a>
+            <a <%if(navSlug == page.slug){%>class="current"<%}%> href="/custom-<%=page.slug%>"><%=page.title%></a>
             <% }); %>
         </div>
         <a href="/search" class="navbar-search">
@@ -50,10 +56,10 @@
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
-                <li><a href="/category">分类</a></li>
-                <li><a href="/archives">归档</a></li>
+                <li><a <%if(navSlug == 'category'){%>class="current"<%}%> href="/archives">分类</a></li>
+                <li><a <%if(navSlug == 'timeline'){%>class="current"<%}%> href="/timeline">归档</a></li>
                 <% pages.forEach(function(page){ %>
-                <li><a href="/custom-<%=page.slug%>"><%=page.title%></a></li>
+                <li><a <%if(navSlug == page.slug){%>class="current"<%}%> href="/custom-<%=page.slug%>"><%=page.title%></a></li>
                 <% }); %>
             </ul>
         </div>

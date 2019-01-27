@@ -19,6 +19,8 @@ class ContentController extends Controller {
       posts,
       postShare: false,
       postDirectory: false,
+      title: '',
+      navSlug: '',
     }, commonData);
     await this.ctx.render('index.html', data);
   }
@@ -39,6 +41,8 @@ class ContentController extends Controller {
       tags,
       postShare: true,
       postDirectory: true,
+      title: post.title,
+      navSlug: '',
     }, commonData);
     await this.ctx.render('post.html', data);
   }
@@ -53,6 +57,10 @@ class ContentController extends Controller {
     const data = Object.assign({
       bgColor: 'bg-white',
       page,
+      title: page.title,
+      postShare: false,
+      postDirectory: false,
+      navSlug: page.slug,
     }, commonData);
     await this.ctx.render('page.html', data);
   }
