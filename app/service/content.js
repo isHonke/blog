@@ -71,6 +71,18 @@ class ContentService extends Service {
     const sql = 'select c.cid, c.title, c.slug, from_unixtime(c.created, "%b %d, %Y") as created from content as c where c.type = "post" and c.status = 1 and from_unixtime(c.created, "%Y-%m") = ? order by c.created desc';
     return await this.app.mysql.query(sql, [ dateString ]);
   }
+
+  // 根据meta的slug和type分页查询相应的文章信息
+  async findPostsBySlugAndType(slug, type, page, limit) {
+    const sql = `select c.cid, c.title, c.slug, from_unixtime(c.created, '%b %d, %Y') as created, c.logo, c.color, m.name
+    from content as c
+    join meta as m
+    join relationship as r
+    where c.type = "post" and c.status = 1 and m.slug = ? and m.type = ? and c.cid = r.cid and r.mid = m.mid
+    order by c.created desc
+    limit ?, ?`;
+    return await this.app.mysql.query(sql, [ slug, type, page - 1, limit ]);
+  }
 }
 
 module.exports = ContentService;
