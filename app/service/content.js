@@ -15,12 +15,14 @@ class ContentService extends Service {
 
   // 分页获取文章信息
   async findPosts(page, limit) {
-    return await this.app.mysql.select('content', {
-      where: { type: 'post', status: 1 }, // WHERE 条件
-      orders: [[ 'created', 'asc' ]], // 排序方式
-      limit, // 返回数据量
-      offset: (page - 1) * limit, // 数据偏移量
-    });
+    const sql = `select c.*, m.name as categoryName, m.slug as categorySlug
+    from content as c 
+    join relationship as r 
+    join meta as m
+    where c.type = "post" and c.status = 1 and c.cid = r.cid and r.mid = m.mid and m.type = "category"
+    order by c.created asc
+    limit ?, ?`;
+    return await this.app.mysql.query(sql, [ page - 1, limit ]);
   }
 
   // 获取指定条数最近文章
