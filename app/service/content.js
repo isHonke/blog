@@ -47,8 +47,6 @@ class ContentService extends Service {
   async findPostById(cid) {
     const res = await this.app.mysql.select('content', {
       where: { type: 'post', status: 1, cid },
-      limit: 1,
-      offset: 0,
     });
     return res[0];
   }
@@ -58,6 +56,18 @@ class ContentService extends Service {
     const sql = 'select c.cid, c.title, c.slug, c.created from content as c join relationship as r where r.mid = ? and r.cid = c.cid';
     const res = await this.app.mysql.query(sql, [ mid ]);
     return res;
+  }
+
+  // 获取所有文章的时间分组，按yyyy-mm格式
+  async findDatesByMonth() {
+    const sql = 'select distinct from_unixtime(created, "%Y-%m") as queryTime, from_unixtime(created, "%b %Y") as showTime from content as c where c.type = "post" and c.status = 1 order by queryTime desc';
+    return await this.app.mysql.query(sql);
+  }
+
+  // 根据年月份查询文章信息
+  async findPostsByMonth(dateString) {
+    const sql = 'select c.cid, c.title, c.slug, from_unixtime(c.created, "%b %d, %Y") as created from content as c where c.type = "post" and c.status = 1 and from_unixtime(c.created, "%Y-%m") = ? order by c.created desc';
+    return await this.app.mysql.query(sql, [ dateString ]);
   }
 }
 

@@ -4,10 +4,26 @@ const Controller = require('egg').Controller;
 
 class ContentController extends Controller {
   async allPosts() {
-    // 假如 我们拿到用户 id 从数据库获取用户详细信息
-    const ctx = this.ctx;
-    const user = await ctx.service.user.find();
-    ctx.body = user;
+    const list = [];
+    const dates = await this.service.content.findDatesByMonth();
+    for (const key in dates) {
+      const item = dates[key];
+      const posts = await this.service.content.findPostsByMonth(item.queryTime);
+      list.push({
+        date: item.showTime,
+        posts,
+      });
+    }
+    const commonData = await this.service.common.getCommonData();
+    const data = Object.assign({
+      bgColor: 'bg-grey',
+      list,
+      postShare: false,
+      postDirectory: false,
+      title: '归档',
+      navSlug: 'timeline',
+    }, commonData);
+    await this.ctx.render('timeline.html', data);
   }
 
   async posts() {

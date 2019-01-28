@@ -1,0 +1,27 @@
+<% include header.html %>
+<div class="main-content archive-page clearfix">
+	<div class="categorys-item">
+        <% list.forEach(function(item){ %>
+        <div class="categorys-title"><%=item.date%></div>
+        <div class="post-lists">
+            <div class="post-lists-body">
+                <% item.posts.forEach(function(post){%>
+                <div class="post-list-item">
+                    <div class="post-list-item-container">
+                        <div class="item-label">
+                            <div class="item-title">
+                                <a href="/p/<%=post.cid%>"><%=post.title%></a>
+                            </div>
+                            <div class="item-meta clearfix">
+                                <div class="item-meta-date"><%=post.created%></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}); %>
+        </div>
+        <%});%>
+    </div>
+</div>
+<% include footer.html %>
