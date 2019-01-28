@@ -21,10 +21,10 @@ module.exports = app => {
 
   router.get('/archives', controller.category.allCategories);
   router.get('/timeline', controller.content.allPosts);
-  router.get('/search', controller.search.search);
+  // router.get('/search', controller.search.search);
 
-  router.get('/search/:keyword', controller.search.searchKeyword);
-  router.get('/search/:keyword/:page', controller.search.searchKeyword);
+  // router.get('/search/:keyword', controller.search.searchKeyword);
+  // router.get('/search/:keyword/:page', controller.search.searchKeyword);
 
   // 后台路由，返回接口数据
 };

@@ -23,6 +23,12 @@ class MetaService extends Service {
       where: { type: 'category' },
     });
   }
+
+  // 获取搜索页需要的标签
+  async findAllTags() {
+    const sql = 'select m.mid, m.name, m.slug, m.count from meta as m where m.type = "tag" and m.count != 0 order by m.count desc limit 50';
+    return await this.app.mysql.query(sql);
+  }
 }
 
 module.exports = MetaService;
