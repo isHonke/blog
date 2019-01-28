@@ -22,7 +22,7 @@ class ContentService extends Service {
     where c.type = "post" and c.status = 1 and c.cid = r.cid and r.mid = m.mid and m.type = "category"
     order by c.created asc
     limit ?, ?`;
-    return await this.app.mysql.query(sql, [ page - 1, limit ]);
+    return await this.app.mysql.query(sql, [ (page - 1) * limit, limit ]);
   }
 
   // 获取指定条数最近文章
@@ -81,7 +81,7 @@ class ContentService extends Service {
     where c.type = "post" and c.status = 1 and m.slug = ? and m.type = ? and c.cid = r.cid and r.mid = m.mid
     order by c.created desc
     limit ?, ?`;
-    return await this.app.mysql.query(sql, [ slug, type, page - 1, limit ]);
+    return await this.app.mysql.query(sql, [ slug, type, (page - 1) * limit, limit ]);
   }
 }
 
