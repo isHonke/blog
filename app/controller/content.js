@@ -54,9 +54,6 @@ class ContentController extends Controller {
   async post() {
     const { cid } = this.ctx.params;
     const post = await this.service.content.findPostById(cid);
-    const create_date = new Date(post.created * 1000);
-    post.time = create_date.toDateString().split(' ').splice(1)
-      .join(' ');
     const category = await this.service.meta.findCategoryById(cid);
     const tags = await this.service.meta.findTagsById(cid);
     const commonData = await this.service.common.getCommonData();

@@ -55,10 +55,10 @@ class ContentService extends Service {
 
   // 获取文章详情
   async findPostById(cid) {
-    const res = await this.app.mysql.select('content', {
-      where: { type: 'post', status: 1, cid },
-    });
-    return res[0];
+    const sql = `select c.*, from_unixtime(c.created, "%b %d, %Y") as format_created, from_unixtime(c.updated, "%b %d, %Y at %r") as format_updated
+      from content as c
+      where c.type = "post" and c.status = 1 and c.cid = ?`;
+    return (await this.app.mysql.query(sql, [ cid ]))[0];
   }
 
   // 获取指定项目下的所有文章
