@@ -7,8 +7,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="Cache-Control" content="no-transform"/>
 		<meta http-equiv="Cache-Control" content="no-siteapp"/>
-        <link rel="shortcut icon" href="<%=site.favicon%>">
-        <link rel="apple-touch-icon" href="<%=site.iosicon%>">
+        <% if (theme.favicon) { %>
+        <link rel="shortcut icon" href="<%= theme.favicon %>">
+        <% } %>
+        <% if (theme.iosicon) { %>
+        <link rel="apple-touch-icon" href="<%= theme.iosicon %>">
+        <% } %>
         <title>Nothing here - <%=site.title%></title>
         <style>
         body{

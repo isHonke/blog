@@ -2,25 +2,34 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <% if (theme.dnsPrefetch == 'true') { %>
     <meta http-equiv="x-dns-prefetch-control" content="on">
+    <% if (theme.adnAdd) { %>
+    <link rel="dns-prefetch" href="<%= theme.cdnAdd %>" />
+    <% } %>
     <link rel="dns-prefetch" href="//cdn.bootcss.com" />
     <link rel="dns-prefetch" href="//secure.gravatar.com" />
+    <% } %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-transform"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="shortcut icon" href="<%=site.favicon%>">
-    <link rel="apple-touch-icon" href="<%=site.iosicon%>">
+    <% if (theme.favicon) { %>
+    <link rel="shortcut icon" href="<%= theme.favicon %>">
+    <% } %>
+    <% if (theme.iosicon) { %>
+    <link rel="apple-touch-icon" href="<%= theme.iosicon %>">
+    <% } %>
     <title>
-    <%if(title){%>
-        <%=title%> - <%=site.title%>
-    <%} else {%>
-        <%=site.title%>
-    <%}%>
+    <% if (title) { %>
+        <%= title %> - <%= site.title %>
+    <% } else { %>
+        <%= site.title %>
+    <% } %>
     </title>
-    <meta name="keywords" content="<%=site.keywords%>" />
-    <meta name="description" content="<%=site.description%>" />
+    <meta name="keywords" content="<%= site.keywords %>" />
+    <meta name="description" content="<%= site.description %>" />
     <link href="//cdn.bootcss.com/highlight.js/9.10.0/styles/xcode.min.css" rel="stylesheet">
     <link href="/public/style.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -28,7 +37,7 @@
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="<%=bgColor%>" gtools_scp_screen_capture_injected="true">
+<body class="<%= bgColor %>" gtools_scp_screen_capture_injected="true">
 <!--[if lt IE 8]>
 <div class="browsehappy" role="dialog">
     当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。
@@ -38,7 +47,7 @@
     <div class="navbar-container">
         <a href="/" class="navbar-logo">
             <% if (site.headerLogoUrl) { %>
-            <img src="<%=site.headerLogoUrl%>" alt="<%=site.title%>" />
+            <img src="<%= site.headerLogoUrl %>" alt="<%= site.title %>" />
             <% } else { %>
             <%=site.title%>
             <% } %>
