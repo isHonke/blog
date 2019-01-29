@@ -31,8 +31,12 @@
 		<div class="bottom-bar-items social-share left">
 		</div>
 		<div class="bottom-bar-items right">
-			<span class="bottom-bar-item"><a href="/">←</a></span>
-			<span class="bottom-bar-item"><a href="/">→</a></span>
+			<% if (prevAndNext.prev) { %>
+			<span class="bottom-bar-item"><a href="/p/<%= prevAndNext.prev.cid %>">←</a></span>
+			<% } %>
+			<% if (prevAndNext.next) { %>
+			<span class="bottom-bar-item"><a href="/p/<%= prevAndNext.next.cid %>">→</a></span>
+			<% } %>
 			<span class="bottom-bar-item"><a href="#footer">↓</a></span>
 			<span class="bottom-bar-item"><a href="#">↑</a></span>
 		</div>

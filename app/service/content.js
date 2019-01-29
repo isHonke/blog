@@ -61,6 +61,26 @@ class ContentService extends Service {
     return (await this.app.mysql.query(sql, [ cid ]))[0];
   }
 
+  // 根据创建时间获取指定文章前后文章信息
+  async findPostPrevAndNext(created) {
+    const prevSql = `select c.cid, c.slug
+      from content as c
+      where c.type = "post" and c.status = 1 and c.created > ?
+      order by created asc 
+      limit 1`;
+    const nextSql = `select c.cid, c.slug
+      from content as c
+      where c.type = "post" and c.status = 1 and c.created < ?
+      order by created desc 
+      limit 1`;
+    const prev = (await this.app.mysql.query(prevSql, [ created ]))[0] || '';
+    const next = (await this.app.mysql.query(nextSql, [ created ]))[0] || '';
+    return {
+      prev,
+      next,
+    };
+  }
+
   // 获取指定项目下的所有文章
   async findPostsByMid(mid) {
     const sql = `select c.cid, c.title, c.slug, c.created 
