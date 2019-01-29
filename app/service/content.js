@@ -25,6 +25,14 @@ class ContentService extends Service {
     return await this.app.mysql.query(sql, [ (page - 1) * limit, limit ]);
   }
 
+  // 获取文章总条数
+  async findPostsTotal() {
+    const res = await this.app.mysql.select('content', {
+      where: { type: 'post', status: 1 },
+    });
+    return res.length;
+  }
+
   // 获取指定条数最近文章
   async findRecentPosts(limit) {
     return await this.app.mysql.select('content', {
@@ -82,6 +90,16 @@ class ContentService extends Service {
     order by c.created desc
     limit ?, ?`;
     return await this.app.mysql.query(sql, [ slug, type, (page - 1) * limit, limit ]);
+  }
+
+  // 获取根据meta的slug和type查询的所有文章总数
+  async findPostsBySlugAndTypeTotal(slug, type) {
+    const sql = `select count(*) as total
+      from content as c
+      join meta as m
+      join relationship as r
+      where c.type = "post" and c.status = 1 and m.slug = ? and m.type = ? and c.cid = r.cid and r.mid = m.mid`;
+    return (await this.app.mysql.query(sql, [ slug, type ]))[0].total;
   }
 }
 

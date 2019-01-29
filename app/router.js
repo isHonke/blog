@@ -10,7 +10,7 @@ module.exports = app => {
   router.get('/', controller.content.posts);
   router.get('/page/:page', controller.content.posts);
   router.get('/p/:cid', controller.content.post);
-  router.get('/p/:cid/comment-:page', controller.content.post);
+  // router.get('/p/:cid/comment-:page', controller.content.post);
   router.get('/custom-:slug', controller.content.page);
 
   router.get('/category/:categorySlug', controller.category.categories);

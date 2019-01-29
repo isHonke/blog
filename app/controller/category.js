@@ -33,10 +33,18 @@ class CategoryController extends Controller {
   }
 
   async categories() {
-    const page = this.ctx.params.page || 1;
+    const page = +this.ctx.params.page || 1;
     const limit = 12;
     const slug = this.ctx.params.categorySlug;
     const posts = await this.service.content.findPostsBySlugAndType(slug, 'category', page, limit);
+    const total = await this.service.content.findPostsBySlugAndTypeTotal(slug, 'category');
+    const options = {
+      base: `/category/${slug}/`,
+      total: Math.ceil(total / limit),
+      current: page,
+      prev_text: '←',
+      next_text: '→',
+    };
     const name = posts[0] && posts[0].name || slug;
     const commonData = await this.service.common.getCommonData();
     const data = Object.assign({
@@ -47,6 +55,7 @@ class CategoryController extends Controller {
       postDirectory: false,
       title: name,
       navSlug: slug,
+      options,
     }, commonData);
     await this.ctx.render('archive.html', data);
   }

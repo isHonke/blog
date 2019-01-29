@@ -1,0 +1,40 @@
+<% if (options.total > 1) { %>
+<ol class"page-navigator">
+    <% if (options.current != 1) { %>
+    <li class="prev"><a href="<%= options.base %><%= options.current - 1 %>"><%= options.prev_text %></a></li>
+    <% } %>
+
+    <% if (options.current == 1) { %>
+        <li class="current"><a href="<%= options.base %>1">1</a></li>
+    <% } else { %>
+        <li><a href="<%= options.base %>1">1</a></li>
+    <% } %>
+
+    <% var i = 2;
+    if (options.current > 4) {
+        i = +options.current - 2;
+    } %>
+    <% if (i !== 2) { %>
+        <li><span>...</span></li>
+    <% } %>
+    <% for (i; i<=options.total - 1; i++) { %>
+        <% if (options.current == i) { %>
+            <li class="current"><a href="<%= options.base %><%= i %>"><%= i %></a></li>
+        <% } else { %>
+            <li><a href="<%= options.base %><%= i %>"><%= i %></a></li>
+        <% } %>
+        <% if (i == (+options.current + 2)) { %>
+            <li><span>...</span></li>
+        <% break; } %>
+    <% } %>
+
+    <% if (options.current == options.total) { %>
+        <li class="current"><a href="<%= options.base %><%= options.total %>"><%= options.total %></a></li>
+    <% } else { %>
+        <li><a href="<%= options.base %><%= options.total %>"><%= options.total %></a></li>
+    <% } %>
+    
+    <% if (options.current != options.total) { %>
+    <li class="next"><a href="<%= options.base %><%= (options.current + 1) %>"><%= options.next_text %></a></li>
+    <% } %>
+<% } %>

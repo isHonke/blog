@@ -27,9 +27,18 @@ class ContentController extends Controller {
   }
 
   async posts() {
-    const page = this.ctx.params.page || 1;
-    const posts = await this.service.content.findPosts(page, 20);
+    const page = +this.ctx.params.page || 1;
+    const limit = 12;
+    const posts = await this.service.content.findPosts(page, limit);
     const commonData = await this.service.common.getCommonData();
+    const total = await this.service.content.findPostsTotal();
+    const options = {
+      base: '/page/',
+      total: Math.ceil(total / limit),
+      current: page,
+      prev_text: '←',
+      next_text: '→',
+    };
     const data = Object.assign({
       bgColor: 'bg-grey',
       posts,
@@ -37,6 +46,7 @@ class ContentController extends Controller {
       postDirectory: false,
       title: '',
       navSlug: '',
+      options,
     }, commonData);
     await this.ctx.render('index.html', data);
   }
