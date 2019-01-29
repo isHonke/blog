@@ -8,7 +8,7 @@ class CommonService extends Service {
     const site = await this.service.config.findConfigByGroup('site');
     const pages = await this.service.content.findAllPages();
     const recentPosts = await this.service.content.findRecentPosts(8);
-    const recentComments = await this.service.comment.findRecentComments(8);
+    // const recentComments = await this.service.comment.findRecentComments(8);
     const social = await this.service.config.findConfigByGroup('social');
     const data = {
       site,
@@ -16,7 +16,7 @@ class CommonService extends Service {
       social,
       year: new Date().getFullYear(),
       recentPosts,
-      recentComments,
+      // recentComments,
     };
     return data;
   }

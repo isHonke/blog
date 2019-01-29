@@ -7,7 +7,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1548516435655_5096';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = [ 'notfoundHandler' ];
 
   config.view = {
     defaultViewEngine: 'ejs',
