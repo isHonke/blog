@@ -20,7 +20,7 @@ class ContentService extends Service {
     join relationship as r 
     join meta as m
     where c.type = "post" and c.status = 1 and c.cid = r.cid and r.mid = m.mid and m.type = "category"
-    order by c.created asc
+    order by c.created desc
     limit ?, ?`;
     return await this.app.mysql.query(sql, [ (page - 1) * limit, limit ]);
   }
@@ -37,7 +37,7 @@ class ContentService extends Service {
   async findRecentPosts(limit) {
     return await this.app.mysql.select('content', {
       where: { type: 'post', status: 1 },
-      orders: [[ 'created', 'asc' ]],
+      orders: [[ 'created', 'desc' ]],
       limit,
       offset: 0,
     });
@@ -63,7 +63,11 @@ class ContentService extends Service {
 
   // 获取指定项目下的所有文章
   async findPostsByMid(mid) {
-    const sql = 'select c.cid, c.title, c.slug, c.created from content as c join relationship as r where r.mid = ? and r.cid = c.cid';
+    const sql = `select c.cid, c.title, c.slug, c.created 
+      from content as c 
+      join relationship as r 
+      where r.mid = ? and r.cid = c.cid
+      order by c.created desc`;
     const res = await this.app.mysql.query(sql, [ mid ]);
     return res;
   }
