@@ -24,8 +24,7 @@ class CategoryController extends Controller {
     const data = Object.assign({
       bgColor: 'bg-grey',
       list,
-      postShare: false,
-      postDirectory: false,
+      isPost: false,
       title: '分类',
       navSlug: 'category',
     }, commonData);
@@ -51,8 +50,7 @@ class CategoryController extends Controller {
       bgColor: 'bg-white',
       commonTitle: 'Category : ' + name,
       posts: posts.length !== 0 ? posts : '',
-      postShare: false,
-      postDirectory: false,
+      isPost: false,
       title: name,
       navSlug: slug,
       options,

@@ -18,8 +18,7 @@ class ContentController extends Controller {
     const data = Object.assign({
       bgColor: 'bg-grey',
       list,
-      postShare: false,
-      postDirectory: false,
+      isPost: false,
       title: '归档',
       navSlug: 'timeline',
     }, commonData);
@@ -42,8 +41,7 @@ class ContentController extends Controller {
     const data = Object.assign({
       bgColor: 'bg-grey',
       posts,
-      postShare: false,
-      postDirectory: false,
+      isPost: false,
       title: '',
       navSlug: '',
       options,
@@ -64,8 +62,7 @@ class ContentController extends Controller {
       category,
       tags,
       prevAndNext,
-      postShare: true,
-      postDirectory: true,
+      isPost: true,
       title: post.title,
       navSlug: '',
     }, commonData);
@@ -83,8 +80,7 @@ class ContentController extends Controller {
       bgColor: 'bg-white',
       page,
       title: page.title,
-      postShare: false,
-      postDirectory: false,
+      isPost: false,
       navSlug: page.slug,
     }, commonData);
     await this.ctx.render('page.html', data);

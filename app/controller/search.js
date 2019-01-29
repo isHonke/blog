@@ -9,8 +9,7 @@ class SearchController extends Controller {
     const data = Object.assign({
       bgColor: 'bg-grey',
       tags: tags.length !== 0 ? tags : '',
-      postShare: false,
-      postDirectory: false,
+      pisPost: false,
       title: '搜索',
       navSlug: '',
     }, commonData);
