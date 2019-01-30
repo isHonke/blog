@@ -1,11 +1,13 @@
 <% include header.html %>
 
-<div class="post-header-thumb bg-<%=post.color%>">
+<% if (theme.showPostThumb == 'true') { %>
+<% if (post.thumb) { %>
+<div class="post-header-thumb">
 	<div class="post-header-thumb-op" style="background-image:url(<%=post.thumb%>);"></div>
 	<div class="post-header-thumb-cover">
 		<div class="post-header-thumb-container">
 			<div class="post-header-thumb-title">
-				<%=post.title%>
+				<%= post.title %>
 			</div>
 			<div class="post-header-thumb-meta">
 				<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=category.slug%>"><%=category.name%></a>
@@ -18,8 +20,42 @@
 		</div>
 	</div>
 </div>
-<article class="main-content post-page" itemscope itemtype="http://schema.org/Article">
+<% } else { %>
+<div class="post-header-thumb">
+	<div class="post-header-thumb-op" style="background-image:url(<%= func.randPostThumb() %>);"></div>
+	<div class="post-header-thumb-cover">
+		<div class="post-header-thumb-container">
+			<div class="post-header-thumb-title">
+				<%= post.title %>
+			</div>
+			<div class="post-header-thumb-meta">
+				<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=category.slug%>"><%=category.name%></a>
+			</div>
+			<div class="post-tags">
+				<% tags.forEach(function(tag){ %>
+                <a href="/tag/<%=tag.slug%>"><%=tag.name%></a>
+                <% }); %>
+			</div>
+		</div>
+	</div>
+</div>
+<% } %>
+<% } %>
+<article class="main-content <% if (theme.showPostThumb == 'true') { %>post-page<% } else { %>page-page<% } %>" itemscope itemtype="http://schema.org/Article">
+	<div class="post-header">
+		<h1 class="post-title" itemprop="name headline">
+			<%= post.title %>
+		</h1>
+		<div class="post-data">
+			<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=category.slug%>"><%=category.name%></a>
+		</div>
+	</div>
 	<div id="post-content" class="post-content" itemprop="articleBody">
+		<p class="post-tags">
+            <% tags.forEach(function(tag){ %>
+			<a href="/tag/<%=tag.slug%>"><%=tag.name%></a>
+			<% }); %>
+        </p>
 		<%-post.content%>
 		<p class="post-info">
 			本文由 <a href="https://chenyubo.cc">陈钰博</a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可<br>本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名<br>最后编辑时间为: <%= post.format_updated %>

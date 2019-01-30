@@ -2,6 +2,8 @@
 
 const Service = require('egg').Service;
 
+const func = require('../utils/function.js');
+
 class CommonService extends Service {
   // 获取header和footer数据
   async getCommonData() {
@@ -16,6 +18,7 @@ class CommonService extends Service {
       pages,
       year: new Date().getFullYear(),
       recentPosts,
+      func,
       // recentComments,
     };
     return data;

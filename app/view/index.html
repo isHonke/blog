@@ -1,23 +1,28 @@
 <% include header.html %>
 
-<div class="main-content index-page clearfix">
+<div class="main-content index-page clearfix <% if (theme.postListSwitch == 'one') { %>onlist-page<% } %>">
 	<div class="post-lists">
 		<div class="post-lists-body">
-        <% posts.forEach(function(post){ %>
+        <% posts.forEach(function(post) { %>
+			<% if (theme.postListSwitch == 'three') { %>
             <div class="post-list-item">
 				<div class="post-list-item-container">
-					<div class="item-thumb bg-<%=post.color%>" style="background-image:url(<%=post.thumb%>);"></div>
+					<% if (post.thumb) { %>
+					<div class="item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color, 'deepgrey') %>" style="background-image:url(<%=post.thumb%>);"></div>
+					<% } else { %>
+					<div class="item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color, 'deepgrey') %>" style="background-image:url(<%= func.randPostThumb() %>);"></div>
+					<% } %>
 					<a href="/p/<%=post.cid%>">
 	                	<div class="item-desc">
-							<p><%=post.description%></p>
+							<p><%= post.description %></p>
 						</div>
 					</a>
-					<div class="item-slant reverse-slant bg-<%=post.color%>"></div>
+					<div class="item-slant reverse-slant <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>"></div>
 					<div class="item-slant"></div>
 					<div class="item-label">
-						<div class="item-title"><a href="/p/<%=post.cid%>"><%=post.title%></a></div>
+						<div class="item-title"><a href="/p/<%= post.cid %>"><%= post.title %></a></div>
 						<div class="item-meta clearfix">
-                            <div class="item-meta-ico bg-ico-<%=post.logo%>" style="background: url(/public/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-meta-ico <%= func.getPostIcon(post.icon) %>" style="background: url(/public/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
 							<div class="item-meta-cat">
                                 <a href="/category/<%=post.categorySlug%>"><%=post.categoryName%></a>
                             </div>
@@ -25,6 +30,35 @@
 					</div>
 				</div>
 			</div>
+			<% } %>
+			<% if (theme.postListSwitch == 'one') { %>
+			<div class="post-onelist-item">
+				<div class="post-onelist-item-container">
+					<a href="/p/<%= post.cid %>">
+						<% if (post.thumb) { %>
+						<div class="onelist-item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>" style="background-image:url(<%=post.thumb%>);"></div>
+						<% } else { %>
+						<div class="onelist-item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>" style="background-image:url(<%= func.randPostThumb() %>);"></div>
+						<% } %>
+					</a>
+					<div class="onelist-item-info">
+						<div class="item-title">
+							<a href="/p/<%= post.cid %>"><%= post.title %></a>
+						</div>
+						<div class="item-meta">
+							<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=post.categorySlug%>"><%=post.categoryName%></a>
+						</div>
+						<div class="item-meta-hr <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>"></div>
+						<div class="item-content">
+							<p><%= post.description %></p>
+						</div>
+						<div class="item-readmore">
+							<a href="/p/<%= post.cid %>"> Continue Reading → </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
         <% }); %>
 		</div>
 	</div>

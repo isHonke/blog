@@ -106,7 +106,7 @@ class ContentService extends Service {
 
   // 根据meta的slug和type分页查询相应的文章信息
   async findPostsBySlugAndType(slug, type, page, limit) {
-    const sql = `select c.cid, c.title, c.slug, from_unixtime(c.created, '%b %d, %Y') as created, c.logo, c.color, m.name
+    const sql = `select c.cid, c.title, c.slug, from_unixtime(c.created, '%b %d, %Y') as created, c.icon, c.color, m.name
     from content as c
     join meta as m
     join relationship as r
