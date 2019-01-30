@@ -15,13 +15,6 @@ class ContentService extends Service {
 
   // 分页获取文章信息
   async findPosts(page, limit) {
-    // const sql = `select c.*, m.name as categoryName, m.slug as categorySlug
-    // from content as c 
-    // join relationship as r 
-    // join meta as m
-    // where c.type = "post" and c.status = 1 and c.cid = r.cid and r.mid = m.mid and m.type = "category"
-    // order by c.created desc
-    // limit ?, ?`;
     const sql = `select b.*, m.name as categoryName, m.slug as categorySlug
       from (select a.*, r.mid
         from (select c.*
@@ -32,7 +25,8 @@ class ContentService extends Service {
         left join relationship as r
         on r.cid = a.cid) b
       left join meta as m
-      on m.mid = b.mid`;
+      on m.mid = b.mid
+      where m.type = "category"`;
     return await this.app.mysql.query(sql, [ (page - 1) * limit, limit ]);
   }
 
