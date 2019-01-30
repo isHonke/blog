@@ -10,12 +10,14 @@
 				<%= post.title %>
 			</div>
 			<div class="post-header-thumb-meta">
-				<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=category.slug%>"><%=category.name%></a>
+				<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time><% if (category) { %> in <a href="/category/<%=category.slug%>"><%=category.name%></a><% } %>
 			</div>
 			<div class="post-tags">
+				<% if (tags.length != 0) { %>
 				<% tags.forEach(function(tag){ %>
                 <a href="/tag/<%=tag.slug%>"><%=tag.name%></a>
                 <% }); %>
+				<% } %>
 			</div>
 		</div>
 	</div>
@@ -29,12 +31,14 @@
 				<%= post.title %>
 			</div>
 			<div class="post-header-thumb-meta">
-				<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=category.slug%>"><%=category.name%></a>
+				<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time><% if (category) { %> in <a href="/category/<%=category.slug%>"><%=category.name%></a><% } %>
 			</div>
 			<div class="post-tags">
+				<% if (tags.length != 0) { %>
 				<% tags.forEach(function(tag){ %>
                 <a href="/tag/<%=tag.slug%>"><%=tag.name%></a>
                 <% }); %>
+				<% } %>
 			</div>
 		</div>
 	</div>
@@ -47,14 +51,16 @@
 			<%= post.title %>
 		</h1>
 		<div class="post-data">
-			<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=category.slug%>"><%=category.name%></a>
+			<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time><% if (category) { %> in <a href="/category/<%=category.slug%>"><%=category.name%></a><% } %>
 		</div>
 	</div>
 	<div id="post-content" class="post-content" itemprop="articleBody">
 		<p class="post-tags">
-            <% tags.forEach(function(tag){ %>
+            <% if (tags.length != 0) { %>
+			<% tags.forEach(function(tag){ %>
 			<a href="/tag/<%=tag.slug%>"><%=tag.name%></a>
 			<% }); %>
+			<% } %>
         </p>
 		<%-post.content%>
 		<p class="post-info">
