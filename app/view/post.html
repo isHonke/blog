@@ -84,4 +84,26 @@
 	</div>
 </div>
 
+<% if (theme.relatedPosts == 'true' && relatedPosts.length != 0) { %>
+<div class="related-post-lists">
+	<div class="post-lists">
+		<div class="post-lists-body">
+		<% relatedPosts.forEach(function(relatedPost){ %>
+			<div class="post-list-item">
+				<div class="post-list-item-container">
+					<div class="item-label">
+						<div class="item-title"><a href="/p/<%=relatedPost.cid%>"><%=relatedPost.title%></a></div>
+						<div class="item-meta clearfix">
+							<div class="item-meta-date" style="color: #5f5f5f;"><%=relatedPost.created%></div>
+							<div class="item-meta-ico <%= func.getPostIcon(relatedPost.icon) %>" style="background: url(/public/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% }); %>
+		</div>
+	</div>
+</div>
+<% } %>
+
 <% include footer.html %>

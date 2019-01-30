@@ -54,6 +54,7 @@ class ContentController extends Controller {
     const post = await this.service.content.findPostById(cid);
     const category = await this.service.meta.findCategoryById(cid);
     const tags = await this.service.meta.findTagsById(cid);
+    const relatedPosts = await this.service.content.findRelatedPosts(cid, tags);
     const prevAndNext = await this.service.content.findPostPrevAndNext(post.created);
     const commonData = await this.service.common.getCommonData();
     const data = Object.assign({
@@ -61,6 +62,7 @@ class ContentController extends Controller {
       post,
       category,
       tags,
+      relatedPosts,
       prevAndNext,
       isPost: true,
       title: post.title,

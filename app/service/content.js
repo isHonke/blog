@@ -125,6 +125,21 @@ class ContentService extends Service {
       where c.type = "post" and c.status = 1 and m.slug = ? and m.type = ? and c.cid = r.cid and r.mid = m.mid`;
     return (await this.app.mysql.query(sql, [ slug, type ]))[0].total;
   }
+
+  // 根据标签查询指定文章相关的文章
+  async findRelatedPosts(cid, tags) {
+    const limit = 6;
+    const tagRange = tags.map(item => item.mid).join(',');
+    const sql = `select distinct c.cid, c.slug, c.title, c.icon, from_unixtime(c.created, '%b %d, %Y') as created
+      from content as c
+      join meta as m
+      join relationship as r
+      where c.type = "post" and c.status = 1 and c.cid = r.cid and r.mid = m.mid and m.mid in (${tagRange}) and c.cid != ?
+      order by created desc
+      limit ?`;
+    const res = await this.app.mysql.query(sql, [ cid, limit ]);
+    return res;
+  }
 }
 
 module.exports = ContentService;
