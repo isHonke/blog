@@ -2,7 +2,7 @@
 
 const func = {};
 
-func.getPostBgColor = function(colorBgPosts, color, defaultColor) {
+func.getPostBgColor = function(colorBgPosts, color, defaultColor = 'deepgrey') {
   if (colorBgPosts === 'true') {
     if (color) {
       return `bg-${color}`;

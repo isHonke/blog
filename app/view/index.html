@@ -17,7 +17,7 @@
 							<p><%= post.description %></p>
 						</div>
 					</a>
-					<div class="item-slant reverse-slant <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>"></div>
+					<div class="item-slant reverse-slant <%= func.getPostBgColor(theme.colorBgPosts, post.color, 'deepgrey') %>"></div>
 					<div class="item-slant"></div>
 					<div class="item-label">
 						<div class="item-title"><a href="/p/<%= post.cid %>"><%= post.title %></a></div>
@@ -36,9 +36,9 @@
 				<div class="post-onelist-item-container">
 					<a href="/p/<%= post.cid %>">
 						<% if (post.thumb) { %>
-						<div class="onelist-item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>" style="background-image:url(<%=post.thumb%>);"></div>
+						<div class="onelist-item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color, 'deepgrey') %>" style="background-image:url(<%=post.thumb%>);"></div>
 						<% } else { %>
-						<div class="onelist-item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>" style="background-image:url(<%= func.randPostThumb() %>);"></div>
+						<div class="onelist-item-thumb <%= func.getPostBgColor(theme.colorBgPosts, post.color, 'deepgrey') %>" style="background-image:url(<%= func.randPostThumb() %>);"></div>
 						<% } %>
 					</a>
 					<div class="onelist-item-info">
@@ -48,7 +48,7 @@
 						<div class="item-meta">
 							<time datetime="<%=post.created%>" itemprop="datePublished">Published on <%=post.format_created%></time> in <a href="/category/<%=post.categorySlug%>"><%=post.categoryName%></a>
 						</div>
-						<div class="item-meta-hr <%= func.getPostBgColor(theme.colorBgPosts, post.color) %>"></div>
+						<div class="item-meta-hr <%= func.getPostBgColor(theme.colorBgPosts, post.color, 'deepgrey') %>"></div>
 						<div class="item-content">
 							<p><%= post.description %></p>
 						</div>
