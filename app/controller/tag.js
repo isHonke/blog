@@ -5,7 +5,7 @@ const Controller = require('egg').Controller;
 class TagController extends Controller {
   async tags() {
     const page = this.ctx.params.page || 1;
-    const limit = 1;
+    const limit = 12;
     const slug = this.ctx.params.tagSlug;
     const posts = await this.service.content.findPostsBySlugAndType(slug, 'tag', page, limit);
     const total = await this.service.content.findPostsBySlugAndTypeTotal(slug, 'tag');
