@@ -143,8 +143,8 @@ postDirectoryBuild();
 <% if (theme.enableFastClick) { %>
 <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
 <% } %>
-<% if (theme.enableDirectory && isPost) { %>
 <script>
+<% if (theme.enableDirectory && isPost) { %>
 var postDirectory = new Headroom(document.getElementById("directory-content"), {
     tolerance: 0,
     <% if (theme.showPostThumb == 'true') { %>
