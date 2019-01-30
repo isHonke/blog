@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const marked = require('marked');
 
 class ContentController extends Controller {
   async allPosts() {
@@ -52,6 +53,7 @@ class ContentController extends Controller {
   async post() {
     const { cid } = this.ctx.params;
     const post = await this.service.content.findPostById(cid);
+    post.content = marked(post.content);
     const category = await this.service.meta.findCategoryById(cid);
     const tags = await this.service.meta.findTagsById(cid);
     const relatedPosts = await this.service.content.findRelatedPosts(cid, tags);
@@ -75,6 +77,7 @@ class ContentController extends Controller {
     const { slug } = this.ctx.params;
     const commonData = await this.service.common.getCommonData();
     const page = await this.service.content.findPageBySlug(slug);
+    page.content = marked(page.content);
     const create_date = new Date(page.created * 1000);
     page.time = create_date.toDateString().split(' ').splice(1)
       .join(' ');
