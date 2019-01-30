@@ -19,7 +19,7 @@ class TagController extends Controller {
     const name = posts[0] && posts[0].name || slug;
     const commonData = await this.service.common.getCommonData();
     const data = Object.assign({
-      bgColor: 'bg-white',
+      bgColor: 'bg-grey',
       commonTitle: 'Tag : ' + name,
       posts: posts.length !== 0 ? posts : '',
       isPost: false,
