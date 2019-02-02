@@ -134,13 +134,13 @@ postDirectoryBuild();
 </script>
 <% } %>
 <script src="//cdn.bootcss.com/headroom/0.9.1/headroom.min.js"></script>
-<% if (theme.enableHighlight) { %>
+<% if (theme.enableHighlight == 'true') { %>
 <script src="//cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>
 <% } %>
 <% if (theme.enablePjax == 'true') { %>
 <script src="/public/js/instantclick.min.js"></script>
 <% } %>
-<% if (theme.enableFastClick) { %>
+<% if (theme.enableFastClick == 'true') { %>
 <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
 <% } %>
 <script>
