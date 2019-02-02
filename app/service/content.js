@@ -17,7 +17,7 @@ class ContentService extends Service {
   async findPosts(page, limit) {
     const sql = `select b.*, m.name as categoryName, m.slug as categorySlug
       from (select a.*, r.mid
-        from (select c.*
+        from (select c.*, from_unixtime(c.created, "%b %d, %Y") as format_created
           from content as c
           where c.type = "post" and c.status = 1
           order by c.created desc
