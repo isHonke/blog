@@ -1,0 +1,65 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 陈钰博的博客
+description: 这是陈钰博的博客
+keywords: chenyubo,web,linux,html,css,javascript,react,node,vue,前端,后端,技术,博客,blog,爬虫
+author: 陈钰博
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://chenyubo.cc
+root: /
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+
+# Archive page setting
+# enabled: The default value is true, set to false if you do not want to enable the plugin
+# per_page: Posts displayed per page. (0 = disable pagination)
+# yearly: Generate yearly archive.
+# monthly: Generate monthly archive.
+# daily: Generate daily archive.
+# order_by: Posts order. (Order by date descending by default)
+archive_generator:
+  enabled: true
+  per_page: 0
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
+  
+# Category page setting
+# per_page: Posts displayed per page. (0 = disable pagination)
+category_generator:
+  per_page: 12
+
+# Tag page setting
+# per_page: Posts displayed per page. (0 = disable pagination)
+tag_generator:
+  per_page: 12
+  
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# rss
+feed:
+  type: atom
+  path: atom.xml
+  limit: 0
+  content: true
+  order_by: -date
